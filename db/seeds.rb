@@ -5,3 +5,19 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+require 'faker'
+puts "Cleaning database..."
+Flat.destroy_all
+puts "start seeds"
+
+10.times do
+  Flat.create(
+    name: Faker::FunnyName.three_word_name,
+    address: Faker::Address.full_address,
+    description: Faker::Movies::Lebowski.quote,
+    price_per_night: rand(50..200),
+    number_of_guests: rand(1..5)
+  )
+end
+
+puts "finished"
